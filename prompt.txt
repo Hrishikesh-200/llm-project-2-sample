@@ -1,0 +1,5 @@
+curl -v -X POST http://localhost:3000/task   -H "Content-Type: application/json"   -d '{
+    "email": "student@example.com",
+    "secret": "b1f5e3a9d7c6e4f8b0a1c2d3e4f5a6b7c8d9e0f1a2b3c4d5e6f7a8b9c0d1e2f",
+    "url": "https://tds-llm-analysis.s-anand.net/demo"
+  }'
