@@ -8,6 +8,11 @@ dotenv.config();
 const app = express();
 app.use(bodyParser.json({ limit: '1mb' }));
 
+// === Friendly GET route for Render browser access ===
+app.get('/', (req, res) => {
+  res.send('LLM Quiz Solver API is live. Use POST /task to send quiz tasks.');
+});
+
 const SERVER_SECRET = process.env.SECRET;
 if (!SERVER_SECRET) {
   console.warn('⚠️  Warning: No SECRET set in .env file');
