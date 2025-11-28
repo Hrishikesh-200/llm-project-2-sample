@@ -1,62 +1,30 @@
-FROM node:18-slim
+# Use official Playwright image with all dependencies pre-installed
+FROM mcr.microsoft.com/playwright:v1.56.1-jammy
 
-# Install system dependencies for Playwright
-RUN apt-get update && apt-get install -y \
-    wget \
-    ca-certificates \
-    fonts-liberation \
-    libasound2 \
-    libatk-bridge2.0-0 \
-    libatk1.0-0 \
-    libc6 \
-    libcairo2 \
-    libcups2 \
-    libdbus-1-3 \
-    libexpat1 \
-    libfontconfig1 \
-    libgbm1 \
-    libgcc1 \
-    libglib2.0-0 \
-    libgtk-3-0 \
-    libnspr4 \
-    libnss3 \
-    libpango-1.0-0 \
-    libpangocairo-1.0-0 \
-    libstdc++6 \
-    libx11-6 \
-    libx11-xcb1 \
-    libxcb1 \
-    libxcomposite1 \
-    libxcursor1 \
-    libxdamage1 \
-    libxext6 \
-    libxfixes3 \
-    libxi6 \
-    libxrandr2 \
-    libxrender1 \
-    libxss1 \
-    libxtst6 \
-    lsb-release \
-    xdg-utils \
-    ffmpeg \
-    && rm -rf /var/lib/apt/lists/*
-
+# Set working directory
 WORKDIR /app
+
+# Install Node.js if not already present
+RUN apt-get update && apt-get install -y curl && \
+    curl -fsSL https://deb.nodesource.com/setup_18.x | bash - && \
+    apt-get install -y nodejs && \
+    apt-get clean && \
+    rm -rf /var/lib/apt/lists/*
 
 # Copy package files
 COPY package*.json ./
 
-# Install dependencies
-RUN npm ci
+# Install npm dependencies
+RUN npm ci --production
 
-# Install Playwright browsers
-RUN npx playwright install chromium
-
-# Copy application files
+# Copy all application files
 COPY . .
 
-# Expose port
-EXPOSE 10000
+# Expose port 7860 (Hugging Face Spaces default)
+EXPOSE 7860
 
-# Start application
+# Set environment variable for port
+ENV PORT=7860
+
+# Start the application
 CMD ["node", "server.js"]
