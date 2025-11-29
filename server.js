@@ -66,14 +66,16 @@ app.post('/task', async (req, res) => {
   }
 });
 
-// Use Render-provided PORT or default 3000 for local dev
+// Use Render-provided PORT or default 7860
 const PORT = parseInt(process.env.PORT || '7860', 10);
-app.listen(PORT, () => {
-  console.log(`\n${'═'.repeat(70)}`);
-  console.log(`🌟 Universal LLM Quiz Solver`);
-  console.log(`   Listening on port ${PORT}`);
-  console.log(`   NODE_ENV=${process.env.NODE_ENV || 'undefined'}`);
-  console.log(`   SECRET set? ${!!process.env.SECRET}`);
-  console.log('   Make sure OPENAI/AIPIPE/GROQ/TRANSCRIBE keys are set in env for LLM/transcription');
-  console.log(`${'═'.repeat(70)}\n`);
+
+// MINIMAL EDIT HERE: Add '0.0.0.0' to explicitly bind to all interfaces
+app.listen(PORT, '0.0.0.0', () => { 
+  console.log(`\n${'═'.repeat(70)}`);
+  console.log(`🌟 Universal LLM Quiz Solver`);
+  console.log(`   Listening on port ${PORT}`);
+  console.log(`   NODE_ENV=${process.env.NODE_ENV || 'undefined'}`);
+  console.log(`   SECRET set? ${!!process.env.SECRET}`);
+  console.log('   Make sure OPENAI/AIPIPE/GROQ/TRANSCRIBE keys are set in env for LLM/transcription');
+  console.log(`${'═'.repeat(70)}\n`);
 });
