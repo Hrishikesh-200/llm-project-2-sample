@@ -1,12 +1,12 @@
 {
   "name": "llm-quiz-analysis",
-  "version": "0.1.0",
-  "description": "Endpoint to solve LLM quiz tasks (demo starter).",
+  "version": "1.0.0",
+  "description": "LLM Task Solver - HF Playwright Compatible",
   "type": "module",
   "main": "server.js",
   "scripts": {
     "start": "node server.js",
-    "postinstall": "npx playwright install chromium"
+    "postinstall": "npx playwright install --with-deps chromium"
   },
   "dependencies": {
     "axios": "^1.13.2",
