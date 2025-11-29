@@ -67,7 +67,7 @@ app.post('/task', async (req, res) => {
 });
 
 // Use Render-provided PORT or default 3000 for local dev
-const PORT = parseInt(process.env.PORT || '3000', 10);
+const PORT = parseInt(process.env.PORT || '7860', 10);
 app.listen(PORT, () => {
   console.log(`\n${'═'.repeat(70)}`);
   console.log(`🌟 Universal LLM Quiz Solver`);
